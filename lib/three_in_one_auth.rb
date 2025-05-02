@@ -1,6 +1,7 @@
 require 'devise'
 require 'cancancan'
 require 'rolify'
+require "three_in_one_auth/version"
 
 module ThreeInOneAuth
   class << self
@@ -25,6 +26,5 @@ module ThreeInOneAuth
   end
 end
 
-require 'three_in_one_auth/version'
 require 'three_in_one_auth/engine' if defined?(Rails)
 require 'generators/three_in_one_auth/install/install_generator' if defined?(Rails)
