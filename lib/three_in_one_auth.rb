@@ -1,7 +1,5 @@
-require 'devise'
-require 'cancancan'
-require 'rolify'
 require "three_in_one_auth/version"
+require "three_in_one_auth/engine"
 
 module ThreeInOneAuth
   class << self
@@ -10,21 +8,12 @@ module ThreeInOneAuth
 
   def self.setup
     self.configuration ||= Configuration.new
-    yield(configuration)
+    yield(configuration) if block_given?
   end
 
   class Configuration
-    attr_accessor :enable_omniauth, :omniauth_providers
-    attr_accessor :enable_invitable, :invitable_options
-
-    def initialize
-      @enable_omniauth = false
-      @omniauth_providers = {}
-      @enable_invitable = false
-      @invitable_options = {}
-    end
+    # Add your configuration options here
+    # For example:
+    # attr_accessor :some_option
   end
 end
-
-require 'three_in_one_auth/engine' if defined?(Rails)
-require 'generators/three_in_one_auth/install/install_generator' if defined?(Rails)
