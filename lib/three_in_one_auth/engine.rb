@@ -28,7 +28,7 @@ module ThreeInOneAuth
       # Configure Rolify
       Rolify.configure do |config|
         config.use_dynamic_shortcuts
-        config.use_mongoid = defined?(Mongoid)
+        config.orm = defined?(Mongoid) ? :mongoid : :active_record
       end
 
       # Rails 8 HTTP/2 and HTTP/3 support
