@@ -15,6 +15,12 @@ ThreeInOneAuth.setup do |config|
     invite_for: 2.weeks,
     invitation_limit: 5
   }
+
+  # Rails 8 specific features
+  if Rails.version >= '8.0'
+    config.http3_enabled = true # Enable HTTP/3 support
+    config.use_propshaft = true # Use Propshaft asset pipeline
+  end
 end
 
 # Devise Configuration
@@ -30,4 +36,11 @@ Devise.setup do |config|
   config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
+
+  # Rails 8 specific Devise configurations
+  if Rails.version >= '8.0'
+    config.responder.error_status = :unprocessable_entity
+    config.responder.redirect_status = :see_other
+    config.navigational_formats = ['*/*', :html, :turbo_stream, :turbo_frame]
+  end
 end

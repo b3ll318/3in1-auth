@@ -13,11 +13,12 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.7.0'
+  spec.required_ruby_version = '>= 3.2.0' # Rails 8 requires Ruby 3.2+
 
   spec.add_dependency 'cancancan', '~> 3.5'
   spec.add_dependency 'devise', '~> 4.9'
-  spec.add_dependency 'rails', '~> 6.0'
+  spec.add_dependency 'propshaft', '~> 0.8' # Rails 8 asset pipeline
+  spec.add_dependency 'rails', '>= 6.1', '< 9.0' # Supporting Rails 8.x
   spec.add_dependency 'rolify', '~> 6.0'
 
   # Optional dependencies

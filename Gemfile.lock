@@ -9,7 +9,7 @@ PATH
       omniauth-github (~> 2.0)
       omniauth-google-oauth2 (~> 1.1)
       omniauth-rails_csrf_protection (~> 1.0)
-      rails (~> 6.0)
+      rails (>= 6.1, < 8.0)
       rolify (~> 6.0)
 
 GEM
