@@ -12,12 +12,12 @@ end
 
 # Define a task to build the gem
 task :build do
-  sh 'gem build 3in1-auth.gemspec'
+  sh 'gem build three_in_one_auth.gemspec'
 end
 
 # Define a task to install the gem
-task :install => :build do
-  sh 'gem install 3in1-auth-*.gem'
+task install: :build do
+  sh 'gem install three_in_one_auth-*.gem'
 end
 
 # Define a task to clean up generated files
@@ -26,4 +26,4 @@ task :clean do
 end
 
 # Define the default task
-task :default => [:build, :test]
+task default: %i[build test]

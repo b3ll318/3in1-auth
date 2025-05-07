@@ -1,5 +1,8 @@
 require "three_in_one_auth/version"
 require "three_in_one_auth/engine"
+require "devise"
+require "cancancan"
+require "rolify"
 
 module ThreeInOneAuth
   class << self
@@ -12,8 +15,17 @@ module ThreeInOneAuth
   end
 
   class Configuration
-    # Add your configuration options here
-    # For example:
-    # attr_accessor :some_option
+    attr_accessor :enable_omniauth, :omniauth_providers, 
+                  :enable_invitable, :invitable_options
+
+    def initialize
+      @enable_omniauth = false
+      @omniauth_providers = {}
+      @enable_invitable = false
+      @invitable_options = {
+        invite_for: 2.weeks,
+        invitation_limit: 5
+      }
+    end
   end
 end
