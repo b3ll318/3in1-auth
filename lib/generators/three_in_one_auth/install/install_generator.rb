@@ -5,10 +5,11 @@ module ThreeInOneAuth
       source_root File.expand_path('templates', __dir__)
 
       def self.next_migration_number(dirname)
-        if ActiveRecord::Base.timestamped_migrations
+        next_migration_number = current_migration_number(dirname) + 1
+        if Rails.version >= '8.0'
           Time.now.utc.strftime('%Y%m%d%H%M%S')
         else
-          format('%.3d', current_migration_number(dirname) + 1)
+          format('%.3d', next_migration_number)
         end
       end
 
