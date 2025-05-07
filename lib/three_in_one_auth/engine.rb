@@ -8,7 +8,10 @@ module ThreeInOneAuth
       g.helper false
     end
 
-    initializer 'three_in_one_auth.setup' do |app|
+    initializer 'three_in_one_auth.setup', before: :load_config_initializers do |app|
+      # Initialize configuration if not already initialized
+      ThreeInOneAuth.configuration ||= ThreeInOneAuth::Configuration.new
+
       # Rails 8 uses Zeitwerk by default, no need to explicitly set it
 
       # Configure asset pipeline for Rails 8
@@ -41,8 +44,8 @@ module ThreeInOneAuth
     end
 
     # Hook into Rails middleware stack
-    initializer 'three_in_one_auth.middleware' do |app|
-      if ThreeInOneAuth.configuration.enable_omniauth
+    initializer 'three_in_one_auth.middleware', after: 'three_in_one_auth.setup' do |app|
+      if ThreeInOneAuth.configuration&.enable_omniauth
         app.middleware.use OmniAuth::Builder do
           ThreeInOneAuth.configuration.omniauth_providers.each do |provider, config|
             provider(provider.to_sym, *config)

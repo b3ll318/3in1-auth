@@ -21,7 +21,7 @@ module ThreeInOneAuth
       end
 
       def install_rolify
-        generate 'rolify:role Role'
+        generate 'rolify'
       end
     end
   end
